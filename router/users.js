@@ -3,7 +3,12 @@ const router = express.Router()
 const users = [{name: 'Daniel', age: 23}, {name: 'Mela'}
 ]
 router.get('/', (req, res) => {
-  res.send('Users')
+  res.render('form', { firstName: 'Daniel' })
+})
+
+router.post('/', (req, res) => {
+  users.push({ firstName: req.body.firstName })
+  res.redirect(`/users/${users.length - 1}`)
 })
 
 router.get('/user', (req, res) => {
@@ -13,10 +18,10 @@ router.get('/user', (req, res) => {
 router.route('/:id').get((req, res) => {
   console.log(req.user)
   res.send(`Get user with id: ${req.params.id}`)
-}).post((req, res) => {
-  res.send(`Post user with id: ${req.params.id}`)
+}).put((req, res) => {
+  res.send(`Created user`)
 }).delete((req, res) => {
-  res.send(`Delete user with id: ${req.params.id}`)
+  res.send(`Deleted user with id: ${req.params.id}`)
 })
 
 router.param('id', (req, res, next, id) => {
