@@ -6,5 +6,5 @@ app.listen(3000)
 app.get('/', (req, res) => {
   // res.send('Hello world!')
   // res.download('server.js')
-  res.render('index')
+  res.render('index', { text: 'bye'})
 })
